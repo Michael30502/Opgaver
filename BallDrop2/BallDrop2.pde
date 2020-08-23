@@ -9,6 +9,7 @@ float xBaseMulti, xBasePosMulti, yBaseMulti, yBasePosMulti;
 boolean check = true;
 boolean cws = false, chs = false;
 boolean widthMovement = true, heightMovement = true;
+
 void setup() {
   fullScreen();
   frameRate = 60;
@@ -41,7 +42,6 @@ void setup() {
   xBasePosMulti = xPosMulti;
   yBaseMulti = yMulti;
   yBasePosMulti = yPosMulti;
-
 }
 //Check x and y multibase 
 
@@ -62,49 +62,43 @@ void draw() {
     yPosMulti *= -1;
   }
 
-if(widthMovement == true)
-{
+    if (rectWidth > width-2)
+    {
+      xMulti = xBaseMulti;
+      xPosMulti = xBasePosMulti;
+        }
+
+
+    if (rectHeight > height-2)
+    {
+      yMulti = yBaseMulti;
+      yPosMulti = yBasePosMulti;
+    }
+
+  if (widthMovement == true)
+  {
     rectWidth -= xMulti;
     rectPosX += xPosMulti;
-}
+  }
 
-if(heightMovement == true)
-{
+  if (heightMovement == true)
+  {
     rectPosY += yPosMulti;
     rectHeight -= yMulti;
-
-}
-
-  if (rectWidth < width-4 || rectHeight >= height-4 && rectWidth >= width-4)
-  {
-widthMovement = true;
-  if(rectWidth < width-4)
-{
-
-}
-else
-{
-  xMulti = -xBaseMulti;
-xPosMulti = -xBasePosMulti;
-}
-{
-
-}
   }
-  else
-  widthMovement = false;
 
-  if (rectHeight < height-4 || rectHeight > height-4 && rectWidth > width-4)
+  if (rectWidth < width-2 || rectHeight >= height-2 && rectWidth >= width-2)
   {
-    heightMovement = true;
-   if (rectHeight < height-4)
-    {
-    }
-    else
-    {
-      yMulti = -yBaseMulti;
-yPosMulti = -yBasePosMulti;
-    }
+    widthMovement = true;
+  } 
+  else
+    widthMovement = false;
+//
+
+
+  if (rectHeight < height-2 || rectHeight > height-2 && rectWidth > width-2)
+  {
+    heightMovement = true; 
   }
   else 
   heightMovement = false;
@@ -113,15 +107,15 @@ yPosMulti = -yBasePosMulti;
 
   xBall += xSpeed;
   yBall += ySpeed;
-  if (xBall+25>=(rectPosX+rectWidth))
+  if (xBall+35>=(rectPosX+rectWidth))
     xSpeed = -xBaseSpeed;
-  if (xBall-25<= rectPosX)
+  if (xBall-35<= rectPosX)
     xSpeed = xBaseSpeed;
-  if (yBall+25>=(rectPosY+rectHeight))
+  if (yBall+35>=(rectPosY+rectHeight))
     ySpeed = -yBaseSpeed;
-  if (yBall-25<= rectPosY)
+  if (yBall-35<= rectPosY)
     ySpeed = yBaseSpeed; 
- 
+
   clear();
   stroke(255, 255, 255);
   noFill();
@@ -129,6 +123,4 @@ yPosMulti = -yBasePosMulti;
   rect(rectPosX, rectPosY, rectWidth, rectHeight);
   fill(255, 255, 255);
   circle(xBall, yBall, ballExtent);
-
-
 }
